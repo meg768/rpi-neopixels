@@ -1,4 +1,4 @@
-var Event   = require('event');
+var Events  = require('events');
 var sprintf = require('yow/sprintf');
 var Timer   = require('yow/timer');
 var Pixels  = require('./pixels');
