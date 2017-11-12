@@ -16,7 +16,7 @@ module.exports = function NeopixelStrip(options) {
 
 	var _width         = options.width;
 	var _height        = options.height;
-	var _speed         = 1.0;
+	var _speed         = options.speed ? options.speed : 1.0;
 	var _length        = _width * _height;
 	var _strip         = require('rpi-ws281x-native');
 	var _pixels        = new Uint32Array(_length);
@@ -77,9 +77,11 @@ module.exports = function NeopixelStrip(options) {
 			debug(sprintf('Transition "%s %d" took %d milliseconds to run.', options.transition, duration, time));
 
 			// Adjust speed factor
-			_speed = (_speed * duration) / time;
+			if (options.speed == undefined) {
+				_speed = (_speed * duration) / time;
+				debug(sprintf('Adjusting speed factor to %02f', _speed));
+			}
 
-			debug(sprintf('Adjusting speed factor to %02f', _speed));
 
 		}
 
