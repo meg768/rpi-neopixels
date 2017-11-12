@@ -40,6 +40,7 @@ module.exports = function NeopixelStrip(options) {
 	process.on('SIGUSR2', exit);
 	process.on('SIGINT', exit);
 	process.on('SIGTERM', exit);
+	process.on('SIGKILL', exit);
 
 	_this.render = function(pixels, options) {
 
