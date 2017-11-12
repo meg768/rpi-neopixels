@@ -1,8 +1,9 @@
+var Events  = require('events');
 var isArray = require('yow/is').isArray;
 var sprintf = require('yow/sprintf');
 var Timer   = require('yow/timer');
+
 var Pixels  = require('./pixels');
-var Events  = require('events')
 
 
 function debug() {

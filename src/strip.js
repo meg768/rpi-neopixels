@@ -5,10 +5,9 @@
 module.exports = function NeopixelStrip(options) {
 
 	var Color = require('color');
-	var Sleep = require('sleep');
 
-	var isString = require('../yow/is').isString;
-	var isObject = require('../yow/is').isObject;
+	var isString = require('yow/is').isString;
+	var isObject = require('yow/is').isObject;
 	var Pixels   = require('./pixels.js');
 
 	options = options || {};
