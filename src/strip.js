@@ -70,9 +70,13 @@ module.exports = function NeopixelStrip(options) {
 				_strip.render(tmp);
 			}
 
-			var now = new Date();
+			var now  = new Date();
+			var time = now - timer;
 
 			debug('Fade', options.duration, 'took', now - timer, 'milliseconds');
+
+			// Adjust speed factor
+			_speed = (_speed * duration) / time;
 
 		}
 
