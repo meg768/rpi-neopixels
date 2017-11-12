@@ -1,11 +1,10 @@
-var Strip = require('./strip.js')
+var Strip    = require('./strip.js')
+var Color    = require('color');
 var isString = require('yow/is').isString;
+var isObject = require('yow/is').isObject;
 
 module.exports = function Pixels(strip) {
 
-	var Color    = require('color');
-	var isString = require('yow/is').isString;
-	var isObject = require('yow/is').isObject;
 
 	if (!strip instanceof Strip)
 		throw new Error('Neopixel strip must be specified');
