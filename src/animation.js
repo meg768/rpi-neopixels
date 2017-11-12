@@ -74,7 +74,7 @@ module.exports = class Animation extends Events {
                 if (self.cancelled) {
                     resolve();
                 }
-                else if (self.options.duration == undefined || self.options.duration <= 0) {
+                else if (self.options.duration == undefined || self.options.duration == 0) {
 
                     // If no duration specified, render only once and stop
                     self.render();
