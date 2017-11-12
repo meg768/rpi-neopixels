@@ -1,5 +1,5 @@
 var Strip = require('./strip.js')
-
+var isString = require('yow/is').isString;
 
 module.exports = function Pixels(strip) {
 
@@ -18,6 +18,10 @@ module.exports = function Pixels(strip) {
 	var _pixels = new Uint32Array(_width * _height);
 
 	_this.fill = function(color) {
+
+		if (isString(color))
+			color = Color(color).rgbNumber();
+
 		for (var i = 0; i < _length; i++)
 			_pixels[i] = color;
 	}
