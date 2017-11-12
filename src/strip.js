@@ -22,6 +22,7 @@ module.exports = function NeopixelStrip(options) {
 	var _length        = _width * _height;
 	var _strip         = require('rpi-ws281x-native');
 	var _pixels        = new Uint32Array(_length);
+	var _canvas        = new Uint32Array(_length);
 
 	_this.length = _length;
 	_this.width  = _width;
@@ -43,7 +44,45 @@ module.exports = function NeopixelStrip(options) {
 	process.on('SIGINT', exit);
 	process.on('SIGTERM', exit);
 
-	_this.render = function(pixels, options) {
+
+	_this.fill = function(color) {
+		for (var i = 0; i < _length; i++)
+			_canvas[i] = color;
+	}
+
+	_this.fillRGB = function(red, green, blue) {
+		_this.fill((red << 16) | (green << 8) | blue);
+	}
+
+	_this.clear = function() {
+		_this.fill(0);
+	}
+
+	_this.setPixelAtIndex = function(index, color) {
+		_canvas[index] = color;
+	}
+
+	_this.getPixelAtIndex = function(index) {
+		return _canvas[index];
+	}
+
+	_this.setPixel = function(x, y, color) {
+		_canvas[y * _width + x] = color
+	}
+
+	_this.setPixelRGB = function(x, y, red, green, blue) {
+ 		_canvas[y * _width + x] = (red << 16) | (green << 8) | blue;
+	}
+
+	_this.setPixelHSL = function(x, y, h, s, l) {
+		_canvas[y * _width + x] = Color.hsl(h, s, l).rgbNumber();
+	}
+
+	_this.getPixel = function(x, y) {
+		return _canvas[y * _width + x];
+	}
+
+	_this.render = function(options) {
 
 		var tmp = new Uint32Array(_length);
 
@@ -59,9 +98,9 @@ module.exports = function NeopixelStrip(options) {
 					var g1 = (_pixels[i] & 0x00FF00) >> 8;
 					var b1 = (_pixels[i] & 0x0000FF);
 
-					var r2 = (pixels[i] & 0xFF0000) >> 16;
-					var g2 = (pixels[i] & 0x00FF00) >> 8;
-					var b2 = (pixels[i] & 0x0000FF);
+					var r2 = (_canvas[i] & 0xFF0000) >> 16;
+					var g2 = (_canvas[i] & 0x00FF00) >> 8;
+					var b2 = (_canvas[i] & 0x0000FF);
 
 					var red   = (r1 + (step * (r2 - r1)) / numSteps);
 					var green = (g1 + (step * (g2 - g1)) / numSteps);
@@ -78,8 +117,9 @@ module.exports = function NeopixelStrip(options) {
 			debug('Fade', options.fadeIn, 'took', now - timer, 'milliseconds');
 
 		}
+
 		// Save rgb buffer
-		_pixels.set(pixels);
+		_pixels.set(_canvas);
 
 		// Display the current buffer
 		tmp.set(_pixels);
@@ -94,7 +134,7 @@ module.exports = function NeopixelStrip(options) {
 
 		var map = new Uint16Array(_length);
 
-	    for(var i = 0; i<map.length; i++) {
+	    for(var i = 0; i < map.length; i++) {
 	        var row = Math.floor(i / _width), col = i % _width;
 
 	        if((row % 2) === 0) {
