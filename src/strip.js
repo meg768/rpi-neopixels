@@ -81,7 +81,12 @@ module.exports = function NeopixelStrip(options) {
 				// Adjust speed factor
 				if (options.speed == undefined) {
 					var speed = (_speed * duration) / time;
-					_speed = (speed + _speed) / 2;
+
+					if (_speed != 1.0)
+						_speed = (speed + _speed) / 2;
+					else
+						_speed = speed;
+
 					debug(sprintf('Adjusting speed factor to %02f', _speed));
 				}
 
