@@ -15,7 +15,7 @@ module.exports = function NeopixelStrip(options) {
 
 	var _width         = options.width;
 	var _height        = options.height;
-	var _speed         = options.speed ? options.speed : 1.0;
+	var _speed         = 1.0;
 	var _length        = _width * _height;
 	var _strip         = require('rpi-ws281x-native');
 	var _pixels        = new Uint32Array(_length);
@@ -47,7 +47,7 @@ module.exports = function NeopixelStrip(options) {
 		if (options && options.transition == 'fade') {
 			var duration = options.duration ? options.duration : 100;
 			var numSteps = duration * _speed;
-			var timer    = new Date();
+			var then     = new Date();
 
 			for (var step = 0; step < numSteps; step++) {
 				for (var i = 0; i < _length; i++) {
@@ -71,12 +71,14 @@ module.exports = function NeopixelStrip(options) {
 			}
 
 			var now  = new Date();
-			var time = now - timer;
+			var time = now - then;
 
-			debug('Fade', options.duration, 'took', now - timer, 'milliseconds');
+			debug(sprintf('Transition "%s %d" took %d milliseconds to run.', options.transition, duration, time));
 
 			// Adjust speed factor
 			_speed = (_speed * duration) / time;
+
+			debug(sprintf('Adjusting speed factor to %02f', _speed));
 
 		}
 
