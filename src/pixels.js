@@ -58,18 +58,6 @@ module.exports = function Pixels(strip) {
 		return _pixels[y * _width + x];
 	}
 
-	_this.setPixels = function(pixels) {
-		_pixels.set(pixels);
-	}
-
-	_this.getPixels = function() {
-		return _pixels;
-	}
-
-	_this.toUint32Array = function() {
-		return _pixels;
-	}
-
 	_this.render = function(options) {
 		_strip.render(_pixels, options);
 	}
