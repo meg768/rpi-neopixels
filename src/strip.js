@@ -46,44 +46,46 @@ module.exports = function NeopixelStrip(options) {
 		var tmp = new Uint32Array(_length);
 
 		if (options && options.transition == 'fade') {
-			var duration = options.duration ? options.duration : 100;
-			var numSteps = duration * _speed;
-			var then     = new Date();
+			var duration = options.duration != undefined ? options.duration : 100;
 
-			for (var step = 0; step < numSteps; step++) {
-				for (var i = 0; i < _length; i++) {
+			if (duration > 0) {
+				var numSteps = duration * _speed;
+				var then     = new Date();
 
-					var r1 = (_pixels[i] & 0xFF0000) >> 16;
-					var g1 = (_pixels[i] & 0x00FF00) >> 8;
-					var b1 = (_pixels[i] & 0x0000FF);
+				for (var step = 0; step < numSteps; step++) {
+					for (var i = 0; i < _length; i++) {
 
-					var r2 = (pixels[i] & 0xFF0000) >> 16;
-					var g2 = (pixels[i] & 0x00FF00) >> 8;
-					var b2 = (pixels[i] & 0x0000FF);
+						var r1 = (_pixels[i] & 0xFF0000) >> 16;
+						var g1 = (_pixels[i] & 0x00FF00) >> 8;
+						var b1 = (_pixels[i] & 0x0000FF);
 
-					var red   = (r1 + (step * (r2 - r1)) / numSteps);
-					var green = (g1 + (step * (g2 - g1)) / numSteps);
-					var blue  = (b1 + (step * (b2 - b1)) / numSteps);
+						var r2 = (pixels[i] & 0xFF0000) >> 16;
+						var g2 = (pixels[i] & 0x00FF00) >> 8;
+						var b2 = (pixels[i] & 0x0000FF);
 
-					tmp[i] = (red << 16) | (green << 8) | blue;
+						var red   = (r1 + (step * (r2 - r1)) / numSteps);
+						var green = (g1 + (step * (g2 - g1)) / numSteps);
+						var blue  = (b1 + (step * (b2 - b1)) / numSteps);
+
+						tmp[i] = (red << 16) | (green << 8) | blue;
+					}
+
+					_strip.render(tmp);
 				}
 
-				_strip.render(tmp);
+				var now  = new Date();
+				var time = now - then;
+
+				debug(sprintf('Transition "%s %d" took %d milliseconds to run.', options.transition, duration, time));
+
+				// Adjust speed factor
+				if (options.speed == undefined) {
+					var speed = (_speed * duration) / time;
+					_speed = (speed + _speed) / 2;
+					debug(sprintf('Adjusting speed factor to %02f', _speed));
+				}
+
 			}
-
-			var now  = new Date();
-			var time = now - then;
-
-			debug(sprintf('Transition "%s %d" took %d milliseconds to run.', options.transition, duration, time));
-
-			// Adjust speed factor
-			if (options.speed == undefined) {
-				var speed = (_speed * duration) / time;
-				_speed = (speed + _speed) / 2;
-				debug(sprintf('Adjusting speed factor to %02f', _speed));
-			}
-
-
 		}
 
 		// Save rgb buffer
