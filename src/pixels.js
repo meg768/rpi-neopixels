@@ -1,21 +1,20 @@
+var Strip = require('./strip.js')
 
 
-
-module.exports = function Pixels(options) {
+module.exports = function Pixels(strip) {
 
 	var Color    = require('color');
 	var isString = require('yow/is').isString;
 	var isObject = require('yow/is').isObject;
 
-	options = options || {};
-
-	if (options.width == undefined || options.height == undefined)
-		throw new Error('Size of matrix or strip must be specified');
+	if (!strip instanceof Strip)
+		throw new Error('Neopixel strip must be specified');
 
 	var _this   = this;
-	var _width  = options.width;
-	var _height = options.height;
+	var _width  = strip.width;
+	var _height = strip.height;
 	var _length = _width * _height;
+	var _strip  = strip;
 	var _pixels = new Uint32Array(_width * _height);
 
 	_this.fill = function(color) {
@@ -65,6 +64,10 @@ module.exports = function Pixels(options) {
 
 	_this.toUint32Array = function() {
 		return _pixels;
+	}
+
+	_this.render = function(options) {
+		_strip.render(_pixels, options);
 	}
 
 

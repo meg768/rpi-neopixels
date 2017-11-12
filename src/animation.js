@@ -1,7 +1,6 @@
-var Events  = require('events');
-var isArray = require('yow/is').isArray;
 var sprintf = require('yow/sprintf');
 var Timer   = require('yow/timer');
+var Pixels  = require('./pixels');
 
 
 function debug() {
@@ -9,20 +8,18 @@ function debug() {
 }
 
 
-
 module.exports = class Animation extends Events {
 
-
-
-    constructor(pixels, options) {
+    constructor(strip, options) {
         super();
 
         this.options         = Object.assign({}, {priority:'normal'}, options);
-        this.pixels          = pixels;
+        this.strip           = strip;
         this.name            = 'None';
         this.cancelled       = false;
         this.renderFrequency = 0;
         this.renderTime      = 0;
+        this.pixels          = new Pixels(strip);
 
     }
 
