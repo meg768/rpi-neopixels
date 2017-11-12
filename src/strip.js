@@ -72,7 +72,7 @@ module.exports = function NeopixelStrip(options) {
 
 			var now = new Date();
 
-			debug('Fade', options.fadeIn, 'took', now - timer, 'milliseconds');
+			debug('Fade', options.duration, 'took', now - timer, 'milliseconds');
 
 		}
 
