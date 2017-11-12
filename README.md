@@ -5,6 +5,14 @@ Neopixels for Raspberry Pi. Under construction.
 
 #### Methods
 
+### Pixels
+
+#### Methods
+
+    setPixel(x, y, color)
+
+
+
 ### Animation
 
 #### Methods
