@@ -5,7 +5,6 @@ var Pixels  = require('./pixels');
 
 
 function debug() {
-    console.log.apply(this, arguments);
 }
 
 
@@ -21,6 +20,12 @@ module.exports = class Animation extends Events {
         this.renderFrequency = 0;
         this.renderTime      = 0;
         this.pixels          = new Pixels(strip);
+
+        if (this.options.debug) {
+            debug = function() {
+                console.log.apply(this, arguments);
+            }
+        }
 
     }
 

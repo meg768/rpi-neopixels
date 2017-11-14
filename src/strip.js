@@ -2,12 +2,20 @@ var isString = require('yow/is').isString;
 var isObject = require('yow/is').isObject;
 var sprintf  = require('yow/sprintf');
 
+function debug() {
+}
 
 module.exports = function NeopixelStrip(options) {
 
 	var Color = require('color');
 
-	options = options || {};
+	options = Object.assign({}, options);
+
+	if (options.debug) {
+		debug = function() {
+			console.log.apply(this, arguments);
+		}
+	}
 
 	if (options.width == undefined || options.height == undefined)
 		throw new Error('Width and height (or length) of strip must be specified.');
@@ -20,6 +28,7 @@ module.exports = function NeopixelStrip(options) {
 	var _length        = _width * _height;
 	var _strip         = require('rpi-ws281x-native');
 	var _pixels        = new Uint32Array(_length);
+
 
 	_this.length = _length;
 	_this.width  = _width;

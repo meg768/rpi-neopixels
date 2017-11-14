@@ -5,7 +5,6 @@ var isFunction  = require('yow/is').isFunction;
 var Events      = require('events');
 
 function debug() {
-    console.log.apply(this, arguments);
 }
 
 
@@ -17,7 +16,13 @@ module.exports = class AnimationQueue extends Events {
             this.currentAnimation = undefined;
             this.animationQueue   = [];
             this.busy             = false;
-            this.options          = options;
+            this.options         = Object.assign({}, options);
+
+            if (this.options.debug) {
+        		debug = function() {
+        			console.log.apply(this, arguments);
+        		}
+        	}
         }
 
 
