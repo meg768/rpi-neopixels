@@ -7,8 +7,6 @@ function debug() {
 
 module.exports = function NeopixelStrip(options) {
 
-	var Color = require('color');
-
 	options = Object.assign({}, options);
 
 	if (options.debug) {
