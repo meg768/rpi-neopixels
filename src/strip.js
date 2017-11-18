@@ -9,7 +9,7 @@ function debug() {
 
 function installCleanup(length) {
 
-	function exit() {
+	function cleanup() {
 		debug('Exiting...');
 
 		var ws281x = require('rpi-ws281x-native');
@@ -20,11 +20,12 @@ function installCleanup(length) {
 
 	}
 
-	debug('Installing exit handlers')
-	process.on('SIGUSR1', exit);
-	process.on('SIGUSR2', exit);
-	process.on('SIGINT',  exit);
-	process.on('SIGTERM', exit);
+	debug('Installing exit handlers.');
+
+	process.on('SIGUSR1', cleanup);
+	process.on('SIGUSR2', cleanup);
+	process.on('SIGINT',  cleanup);
+	process.on('SIGTERM', cleanup);
 
 }
 
