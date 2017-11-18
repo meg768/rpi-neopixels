@@ -1,7 +1,6 @@
 var Events  = require('events');
 var sprintf = require('yow/sprintf');
 var Timer   = require('yow/timer');
-var Pixels  = require('./pixels');
 
 
 function debug() {
@@ -19,7 +18,6 @@ module.exports = class Animation extends Events {
         this.cancelled       = false;
         this.renderFrequency = 0;
         this.renderTime      = 0;
-        this.pixels          = new Pixels(strip);
 
         if (this.options.debug) {
             debug = function() {
