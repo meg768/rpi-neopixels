@@ -4,7 +4,6 @@ var sprintf  = require('yow/sprintf');
 var Color    = require('color');
 
 function debug() {
-	console.log.apply(this, arguments);
 }
 
 function installCleanup(length) {
