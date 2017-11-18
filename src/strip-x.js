@@ -45,11 +45,11 @@ module.exports = class Strip {
 	}
 
 	fill(color) {
-		
+
 		if (isString(color))
 			color = Color(color).rgbNumber();
 
-		for (var i = 0; i < _length; i++)
+		for (var i = 0; i < this.length; i++)
 			this.pixels[i] = color;
 	}
 
