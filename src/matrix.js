@@ -3,8 +3,7 @@ var isObject = require('yow/is').isObject;
 var sprintf  = require('yow/sprintf');
 var ws281x   = require('rpi-ws281x-native');
 var Color    = require('color');
-
-var Strip    = require('./strip-x.js');
+var Strip    = require('./strip.js');
 
 function debug() {
 }
