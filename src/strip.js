@@ -143,6 +143,7 @@ module.exports = function NeopixelStrip(options) {
 
 
 		var map = new Uint16Array(_length);
+		var _width = _length;
 
 	    for (var i = 0; i < map.length; i++) {
 	        var row = Math.floor(i / _width), col = i % _width;
