@@ -1,12 +1,11 @@
 var isString = require('yow/is').isString;
 var isObject = require('yow/is').isObject;
 var sprintf  = require('yow/sprintf');
-var ws281x   = require('rpi-ws281x-native');
 var Color    = require('color');
+var ws281x   = require('rpi-ws281x-native');
 
 function debug() {
 }
-
 
 function exit() {
 	ws281x.reset();
@@ -14,16 +13,17 @@ function exit() {
 
 }
 
-process.on('SIGUSR1', exit);
-process.on('SIGUSR2', exit);
-process.on('SIGINT',  exit);
-process.on('SIGTERM', exit);
-
 module.exports = class Strip {
 
 	constructor(options) {
-		options = Object.assign({}, options);
 
+
+		process.on('SIGUSR1', exit);
+		process.on('SIGUSR2', exit);
+		process.on('SIGINT',  exit);
+		process.on('SIGTERM', exit);
+
+		options = Object.assign({}, options);
 
 		if (options.debug) {
 			debug = function() {
@@ -33,9 +33,6 @@ module.exports = class Strip {
 
 		if (options.length == undefined)
 			throw new Error('Strip length must be specified.');
-
-
-
 
 		this.length  = options.length;
 		this.pixels  = new Uint32Array(this.length);
@@ -68,11 +65,11 @@ module.exports = class Strip {
 
 	setPixelRGB(index, red, green, blue) {
 		this.pixels[index] = (red << 16) | (green << 8) | blue;
-   }
+	}
 
-   setPixelHSL(index, h, s, l) {
-	   _pixels[index] = Color.hsl(h, s, l).rgbNumber();
-   }
+	setPixelHSL(index, h, s, l) {
+		this.pixels[index] = Color.hsl(h, s, l).rgbNumber();
+	}
 
 	render(options) {
 
