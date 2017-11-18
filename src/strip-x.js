@@ -11,12 +11,11 @@ function debug() {
 module.exports = class Strip {
 
 	constructor(options) {
-		var self = this;
-
 		options = Object.assign({}, options);
 
 		function exit() {
-			ws281x.render(new Uint32Array(self.length));
+			console.log('exit');
+			ws281x.render(new Uint32Array(options.length));
 			process.exit();
 
 		}
