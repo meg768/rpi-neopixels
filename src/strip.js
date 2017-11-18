@@ -2,6 +2,7 @@ var isString = require('yow/is').isString;
 var isObject = require('yow/is').isObject;
 var sprintf  = require('yow/sprintf');
 var Color    = require('color');
+var ws281x   = require('rpi-ws281x-native');
 
 function debug() {
 }
@@ -9,8 +10,6 @@ function debug() {
 function installCleanup() {
 
 	function cleanup() {
-
-		var ws281x = require('rpi-ws281x-native');
 		ws281x.reset();
 		process.exit();
 	}
@@ -43,11 +42,11 @@ module.exports = class Strip {
 		this.content = new Uint32Array(this.length);
 		this.tmp     = new Uint32Array(this.length);
 		this.speed   = options.speed ? options.speed : 1.0;
-		this.ws281x  = require('rpi-ws281x-native');
+		this.ws281x  = ws281x;
 
 		this.ws281x.init(this.length);
 
-		installCleanup(this.length);
+		installCleanup();
 	}
 
 	fill(color) {
