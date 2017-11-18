@@ -6,20 +6,14 @@ var Color    = require('color');
 function debug() {
 }
 
-function installCleanup(length) {
+function installCleanup() {
 
 	function cleanup() {
-		debug('Exiting...');
 
 		var ws281x = require('rpi-ws281x-native');
-		ws281x.render(new Uint32Array(length));
-
-		//ws281x.reset();
+		ws281x.reset();
 		process.exit();
-
 	}
-
-	debug('Installing exit handlers.');
 
 	process.on('SIGUSR1', cleanup);
 	process.on('SIGUSR2', cleanup);
