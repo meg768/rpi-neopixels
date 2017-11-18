@@ -8,17 +8,22 @@ function debug() {
 }
 
 
+function exit() {
+	ws281x.reset();
+	process.exit();
+
+}
+
+process.on('SIGUSR1', exit);
+process.on('SIGUSR2', exit);
+process.on('SIGINT',  exit);
+process.on('SIGTERM', exit);
+
 module.exports = class Strip {
 
 	constructor(options) {
 		options = Object.assign({}, options);
 
-		function exit() {
-			console.log('exit');
-			ws281x.render(new Uint32Array(options.length));
-			process.exit();
-
-		}
 
 		if (options.debug) {
 			debug = function() {
@@ -30,10 +35,7 @@ module.exports = class Strip {
 			throw new Error('Strip length must be specified.');
 
 
-		process.on('SIGUSR1', exit);
-		process.on('SIGUSR2', exit);
-		process.on('SIGINT',  exit);
-		process.on('SIGTERM', exit);
+
 
 		this.length  = options.length;
 		this.pixels  = new Uint32Array(this.length);
