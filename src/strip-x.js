@@ -85,7 +85,7 @@ module.exports = class Strip {
 				var then     = new Date();
 
 				for (var step = 0; step < numSteps; step++) {
-					for (var i = 0; i < _length; i++) {
+					for (var i = 0; i < this.length; i++) {
 
 						var r1 = (this.content[i] & 0xFF0000) >> 16;
 						var g1 = (this.content[i] & 0x00FF00) >> 8;
