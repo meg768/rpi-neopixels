@@ -5,6 +5,7 @@ var ws281x   = require('rpi-ws281x-native');
 var Color    = require('color');
 
 var Strip    = require('./strip-x.js');
+
 function debug() {
 }
 
@@ -12,8 +13,6 @@ function debug() {
 module.exports = class Matrix extends Strip {
 
 	constructor(options) {
-		var self = this;
-
         if (options.width == undefined || options.height == undefined)
             throw new Error('Width and height must be specified.');
 
@@ -26,12 +25,12 @@ module.exports = class Matrix extends Strip {
 				console.log.apply(this, arguments);
 			}
         }
-        
+
         this.width  = options.width;
         this.height = options.height;
 
 		var map = new Uint16Array(this.length);
-        
+
         for (var i = 0; i < map.length; i++) {
             var row = Math.floor(i / this.width), col = i % this.width;
 
@@ -43,7 +42,7 @@ module.exports = class Matrix extends Strip {
             }
         }
 
-        this.ws281x.setIndexMapping(map);        
+        ws281x.setIndexMapping(map);
 	}
 
 	setPixel(x, y, color) {
