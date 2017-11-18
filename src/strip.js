@@ -141,7 +141,7 @@ module.exports = function NeopixelStrip(options) {
 	function init() {
 		_strip.init(_length);
 
-		/*
+
 		var map = new Uint16Array(_length);
 
 	    for (var i = 0; i < map.length; i++) {
@@ -156,7 +156,6 @@ module.exports = function NeopixelStrip(options) {
 	    }
 
 		_strip.setIndexMapping(map);
-		*/
 
 	}
 
