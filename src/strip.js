@@ -123,7 +123,7 @@ module.exports = class Strip {
 						tmp[i] = (red << 16) | (green << 8) | blue;
 					}
 
-					ws281x.render(tmp);
+					this.ws281x.render(tmp);
 				}
 
 				var now  = new Date();
