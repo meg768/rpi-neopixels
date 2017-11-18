@@ -2,7 +2,6 @@ var isString = require('yow/is').isString;
 var isObject = require('yow/is').isObject;
 var sprintf  = require('yow/sprintf');
 var Color    = require('color');
-var ws281x   = require('rpi-ws281x-native');
 
 function debug() {
 }
@@ -10,6 +9,7 @@ function debug() {
 function installCleanup(length) {
 
 	function exit() {
+		var ws281x   = require('rpi-ws281x-native');
 		ws281x.render(new Uint32Array(length));
 
 		//ws281x.reset();
@@ -28,6 +28,8 @@ function installCleanup(length) {
 module.exports = class Strip {
 
 	constructor(options) {
+
+		var ws281x = require('rpi-ws281x-native');
 
 		options = Object.assign({}, options);
 
@@ -87,6 +89,7 @@ module.exports = class Strip {
 	render(options) {
 
 		var tmp = this.tmp;
+		var ws281x = require('rpi-ws281x-native');
 
 		if (options && options.transition == 'fade') {
 			var duration = options.duration != undefined ? options.duration : 100;
