@@ -4,12 +4,15 @@ var sprintf  = require('yow/sprintf');
 var Color    = require('color');
 
 function debug() {
+	console.log.apply(this, arguments);
 }
 
 function installCleanup(length) {
 
 	function exit() {
-		var ws281x   = require('rpi-ws281x-native');
+		debug('Exiting...');
+
+		var ws281x = require('rpi-ws281x-native');
 		ws281x.render(new Uint32Array(length));
 
 		//ws281x.reset();
@@ -17,6 +20,7 @@ function installCleanup(length) {
 
 	}
 
+	debug('Installing exit handlers')
 	process.on('SIGUSR1', exit);
 	process.on('SIGUSR2', exit);
 	process.on('SIGINT',  exit);
@@ -28,8 +32,6 @@ function installCleanup(length) {
 module.exports = class Strip {
 
 	constructor(options) {
-
-		var ws281x = require('rpi-ws281x-native');
 
 		options = Object.assign({}, options);
 
@@ -47,8 +49,9 @@ module.exports = class Strip {
 		this.content = new Uint32Array(this.length);
 		this.tmp     = new Uint32Array(this.length);
 		this.speed   = options.speed ? options.speed : 1.0;
+		this.ws281x  = require('rpi-ws281x-native');
 
-		ws281x.init(this.length);
+		this.ws281x.init(this.length);
 
 		installCleanup(this.length);
 	}
@@ -89,7 +92,6 @@ module.exports = class Strip {
 	render(options) {
 
 		var tmp = this.tmp;
-		var ws281x = require('rpi-ws281x-native');
 
 		if (options && options.transition == 'fade') {
 			var duration = options.duration != undefined ? options.duration : 100;
@@ -144,7 +146,7 @@ module.exports = class Strip {
 
 		// Display the current buffer
 		tmp.set(this.content);
-		ws281x.render(tmp);
+		this.ws281x.render(tmp);
 
 	}
 
