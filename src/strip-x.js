@@ -81,19 +81,24 @@ module.exports = class Strip {
 			var duration = options.duration != undefined ? options.duration : 100;
 
 			if (duration > 0) {
+
+				var content = this.content;
+				var pixels  = this.pixels;
+				var length  = this.length;
+
 				var numSteps = duration * this.speed;
 				var then     = new Date();
 
 				for (var step = 0; step < numSteps; step++) {
-					for (var i = 0; i < this.length; i++) {
+					for (var i = 0; i < length; i++) {
 
-						var r1 = (this.content[i] & 0xFF0000) >> 16;
-						var g1 = (this.content[i] & 0x00FF00) >> 8;
-						var b1 = (this.content[i] & 0x0000FF);
+						var r1 = (content[i] & 0xFF0000) >> 16;
+						var g1 = (content[i] & 0x00FF00) >> 8;
+						var b1 = (content[i] & 0x0000FF);
 
-						var r2 = (this.pixels[i] & 0xFF0000) >> 16;
-						var g2 = (this.pixels[i] & 0x00FF00) >> 8;
-						var b2 = (this.pixels[i] & 0x0000FF);
+						var r2 = (pixels[i] & 0xFF0000) >> 16;
+						var g2 = (pixels[i] & 0x00FF00) >> 8;
+						var b2 = (pixels[i] & 0x0000FF);
 
 						var red   = (r1 + (step * (r2 - r1)) / numSteps);
 						var green = (g1 + (step * (g2 - g1)) / numSteps);
