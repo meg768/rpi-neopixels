@@ -9,11 +9,11 @@ function debug() {
 
 module.exports = class Animation extends Events {
 
-    constructor(strip, options) {
+    constructor(pixels, options) {
         super();
 
         this.options         = Object.assign({}, {priority:'normal'}, options);
-        this.strip           = strip;
+        this.pixels           = pixels;
         this.name            = 'None';
         this.cancelled       = false;
         this.renderFrequency = 0;
