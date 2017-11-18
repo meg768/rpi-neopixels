@@ -37,6 +37,7 @@ module.exports = class Strip {
 		this.length  = options.length;
 		this.pixels  = new Uint32Array(this.length);
 		this.content = new Uint32Array(this.length);
+		this.tmp     = new Uint32Array(this.length);
 		this.speed   = options.speed ? options.speed : 1.0;
 
 		ws281x.init(this.length);
@@ -73,8 +74,8 @@ module.exports = class Strip {
 
 	render(options) {
 
-		var tmp = new Uint32Array(this.length);
-
+		var tmp = this.tmp;
+		
 		if (options && options.transition == 'fade') {
 			var duration = options.duration != undefined ? options.duration : 100;
 
