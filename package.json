@@ -1,6 +1,6 @@
 {
   "name": "rpi-neopixels",
-  "version": "1.0.38",
+  "version": "1.0.39",
   "description": "Neopixels for Raspberry Pi",
   "main": "index.js",
   "scripts": {
