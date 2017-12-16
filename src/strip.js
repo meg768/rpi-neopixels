@@ -58,7 +58,7 @@ module.exports = class Strip {
 			this.pixels[i] = color;
 	}
 
-	fillRGB(color, red, green, blue) {
+	fillRGB(red, green, blue) {
 		this.fill((red << 16) | (green << 8) | blue);
 	}
 
