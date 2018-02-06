@@ -44,7 +44,7 @@ module.exports = class Strip {
 		this.speed   = options.speed ? options.speed : 1.0;
 		this.ws281x  = ws281x;
 
-		this.ws281x.init(this.length);
+		this.ws281x.init(this.length,  {dmaNum: 10});
 
 		installCleanup();
 	}
