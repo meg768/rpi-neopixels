@@ -71,6 +71,14 @@ module.exports = class AnimationQueue extends Events {
 				this.animationQueue.unshift(animation);
 			}
 			else {
+                // NY KOD BEGIN
+                if (this.currentAnimation != undefined) {
+                    if (this.currentAnimation.options.duration < 0)
+                        this.currentAnimation.cancel();
+				}
+                // END
+
+
 				this.animationQueue.push(animation);
 			}
 
