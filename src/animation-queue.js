@@ -71,13 +71,11 @@ module.exports = class AnimationQueue extends Events {
 				this.animationQueue.unshift(animation);
 			}
 			else {
-                // NY KOD BEGIN
+                // Remove blocking animations
                 if (this.currentAnimation != undefined) {
-                    if (this.currentAnimation.options.duration < 0)
+                    if (this.currentAnimation.options && this.currentAnimation.options.duration < 0)
                         this.currentAnimation.cancel();
 				}
-                // END
-
 
 				this.animationQueue.push(animation);
 			}
