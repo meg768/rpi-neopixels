@@ -1,10 +1,15 @@
 {
   "name": "rpi-neopixels",
-  "version": "1.0.55",
+  "version": "1.0.56",
   "description": "Neopixels for Raspberry Pi",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "goto-github": "open https://github.com/meg768/rpi-neopixels",
+    "goto-npm": "open https://www.npmjs.com/package/rpi-neopixels",
+    "git-pull": "git pull",
+    "git-commit": "git add -A && git commit -m '-' && git push",
+    "git-revert": "git reset --hard HEAD",
+    "npm-publish": "npm publish"
   },
   "repository": {
     "type": "git",
@@ -18,7 +23,7 @@
   "dependencies": {
       "color": "^2.0.1",
       "yow": "^1.0.84",
-      "rpi-ws281x-native": "^0.8.2"
+      "rpi-ws281x": "^1.0.4"
 },
   "homepage": "https://github.com/meg768/rpi-neopixels#readme"
 }

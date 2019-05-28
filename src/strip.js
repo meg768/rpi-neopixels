@@ -2,7 +2,7 @@ var isString = require('yow/is').isString;
 var isObject = require('yow/is').isObject;
 var sprintf  = require('yow/sprintf');
 var Color    = require('color');
-var ws281x   = require('rpi-ws281x-native');
+var ws281x   = require('rpi-ws281x');
 
 function debug() {
 }
@@ -44,7 +44,7 @@ module.exports = class Strip {
 		this.speed   = options.speed ? options.speed : 1.0;
 		this.ws281x  = ws281x;
 
-		this.ws281x.init(this.length);
+		this.ws281x.configure({leds:this.length});
 
 		installCleanup();
 	}
