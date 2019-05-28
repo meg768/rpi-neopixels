@@ -5,7 +5,7 @@ class App {
 
     constructor() {
 
-        this.pixels = new Neopixels();
+        this.pixels = new Neopixels.Pixels();
 
     }
 
