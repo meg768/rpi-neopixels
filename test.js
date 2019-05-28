@@ -37,7 +37,7 @@ console.log('Loop', this.offset, x, y);
     }
 
     run() {
-        setInterval(this.loop.bind(this), 100);
+        setInterval(this.loop, 100);
 
 
     }
