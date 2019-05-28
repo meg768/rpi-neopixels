@@ -41,7 +41,7 @@ module.exports = class Matrix extends Strip {
             }
         }
 
-        ws281x.setIndexMapping(map);
+        //ws281x.setIndexMapping(map);
 	}
 
 	setPixel(x, y, color) {
