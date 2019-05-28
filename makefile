@@ -6,7 +6,7 @@ git-pull:
 	git pull
 
 git-commit:
-    git add -A && git commit -m '-' && git push
+	git add -A && git commit -m '-' && git push
 
 goto-github:
 	open https://github.com/meg768/rpi-neopixels
