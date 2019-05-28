@@ -4,12 +4,12 @@
   "description": "Neopixels for Raspberry Pi",
   "main": "index.js",
   "scripts": {
-    "goto-github": "open https://github.com/meg768/rpi-neopixels",
-    "goto-npm": "open https://www.npmjs.com/package/rpi-neopixels",
-    "git-pull": "git pull",
-    "git-commit": "git add -A && git commit -m '-' && git push",
-    "git-revert": "git reset --hard HEAD",
-    "npm-publish": "npm publish"
+    "goto-github": "make goto-github",
+    "goto-npm": "make goto-npm",
+    "git-pull": "make git-pull",
+    "git-commit": "make git-commit",
+    "git-revert": "make git-revert",
+    "npm-publish": "make npm-publish"
   },
   "repository": {
     "type": "git",

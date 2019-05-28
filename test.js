@@ -39,7 +39,7 @@ class SequenceTest {
     
             this.offset = (this.offset + 1) % (this.width * this.height);
     
-        }), 100);
+        }, 100);
 
 
     }
