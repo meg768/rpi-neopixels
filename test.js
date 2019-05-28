@@ -38,7 +38,7 @@ class SequenceTest {
             self.pixels.setPixelRGB(x, y, 255, 255, 255);
             self.pixels.render();
     
-            self.offset = (self.offset + 1) % (self.width * self.height);
+            self.offset = (self.offset + 1) % (self.pixels.width * self.pixels.height);
     
         }, 100);
 
