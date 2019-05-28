@@ -24,7 +24,7 @@
       "color": "^2.0.1",
       "yow": "^1.0.84",
       "rpi-pixels": "^1.0.1",
-      "rpi-ws281x": "^1.0.4"
+      "rpi-ws281x": "^1.0.6"
 },
   "homepage": "https://github.com/meg768/rpi-neopixels#readme"
 }
