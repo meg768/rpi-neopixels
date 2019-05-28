@@ -28,7 +28,7 @@ class SequenceTest {
     loop() {
         var x = this.offset % this.width;
         var y = this.offset / this.width;
-
+console.log('Loop', this.offset);
         this.pixels.clear();
         this.pixels.setPixelRGB(x, y, 255, 255, 255);
         this.pixels.render();
