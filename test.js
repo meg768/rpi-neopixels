@@ -10,7 +10,7 @@ class App {
     }
 
     run() {
-        this.pixels.fill("red");
+        this.pixels.fill("green");
         this.pixels.render();
 
 
