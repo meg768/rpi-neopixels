@@ -32,7 +32,7 @@ class SequenceTest {
         var self = this;
         setInterval(() => {
             var x = self.offset % self.pixels.width;
-            var y = self.offset / self.pixels.width;
+            var y = Math.floor(self.offset / self.pixels.width);
             console.log('Loop', self.offset, x, y);
             self.pixels.clear();
             self.pixels.setPixelRGB(x, y, 255, 255, 255);
