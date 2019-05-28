@@ -24,7 +24,6 @@ class SequenceTest {
         this.pixels = new Neopixels.Pixels();
         this.offset = 0;
 
-        console.log('Pixels', this.pixels.width, this.pixels.height);
     }
 
 
@@ -46,9 +45,30 @@ class SequenceTest {
     }
 }
 
+function configure() {
+
+    var stripType = 'grb';
+    var width     = 13;
+    var height    = 13;
+    var map       = new Uint16Array(width * height);
+
+    for (var i = 0; i < map.length; i++) {
+        var row = Math.floor(i / width), col = i % width;
+
+        if ((row % 2) === 0) {
+            map[i] = i;
+        }
+        else {
+            map[i] = (row+1) * width - (col+1);
+        }
+    }
+
+    Neopixels.configure({map:map, width:width, height:height, stripType:stripType});
+
+}
 
 
-Neopixels.configure({width:13, height:13, stripType:'grb'});
+configure();
 
 var app = new SequenceTest();
 app.run();
