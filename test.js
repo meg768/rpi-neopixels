@@ -10,7 +10,7 @@ class App {
     }
 
     run() {
-        this.pixels.fillRGB(255, 0, 0);
+        this.pixels.fill("red");
 
 
     }
