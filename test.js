@@ -19,7 +19,7 @@ class App {
 
 
 
-Neopixels.configure({width:13, height:13, stripType:'rgb'});
+Neopixels.configure({width:13, height:13, stripType:'grb'});
 
 var app = new App();
 app.run();
