@@ -29,6 +29,7 @@ module.exports.Pixels = class extends Pixels {
             var map = config.map;
             var length = this.width * this.height;
             var tmp = new Uint32Array(length);
+            var pixels = this.pixels;
             
             for (var i = 0; i < length; i++) {
                 tmp[i] = pixels[map[i]];
