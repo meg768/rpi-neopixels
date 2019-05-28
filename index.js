@@ -24,22 +24,24 @@ module.exports.Pixels = class extends Pixels {
         super({...options, width:config.width, height:config.height});
     }
 
-    map(pixels, map) {
-        var length = this.width * this.height;
-        var tmp = new Uint32Array(length);
-        
-        for (var i = 0; i < length; i++) {
-            tmp[i] = pixels[map[i]];
+    map() {
+        if (config.map) {
+            var map = config.map;
+            var length = this.width * this.height;
+            var tmp = new Uint32Array(length);
+            
+            for (var i = 0; i < length; i++) {
+                tmp[i] = pixels[map[i]];
+            }
+    
+            return tmp;
         }
-
-        return tmp;
+        else
+            return this.pixels;
     }
 
     render(options) {
-        if (config.map)
-            ws281x.render(this.map(this.pixels, config.map));
-        else
-            ws281x.render(this.pixels);
+        ws281x.render(this.map());
     }
 
 }
