@@ -38,8 +38,6 @@ class SequenceTest {
 
     run() {
         setInterval(this.loop.bind(this), 100);
-        this.pixels.fill("green");
-        this.pixels.render();
 
 
     }
