@@ -23,6 +23,8 @@ class SequenceTest {
 
         this.pixels = new Neopixels.Pixels();
         this.offset = 0;
+
+        console.log('Pixels', this.pixels.width, this.pixels.height);
     }
 
     loop() {
@@ -37,7 +39,7 @@ console.log('Loop', this.offset, x, y);
     }
 
     run() {
-        setInterval(this.loop, 100);
+        setInterval(this.loop.bind(this), 100);
 
 
     }
