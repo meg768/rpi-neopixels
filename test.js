@@ -1,7 +1,7 @@
 var Neopixels = require('./index.js');
 
 
-class App {
+class FillTest {
 
     constructor() {
 
@@ -17,10 +17,38 @@ class App {
     }
 }
 
+class SequenceTest {
+
+    constructor() {
+
+        this.pixels = new Neopixels.Pixels();
+        this.offset = 0;
+    }
+
+    loop() {
+        var x = this.offset % this.width;
+        var y = this.offset / this.width;
+
+        this.pixels.clear();
+        this.pixels.setPixelRGB(x, y, 255, 255, 255);
+        this.pixels.render();
+
+        this.offset = (this.offset + 1) % (this.width * this.height);
+    }
+
+    run() {
+        setInterval(this.loop.bind(this), 100);
+        this.pixels.fill("green");
+        this.pixels.render();
+
+
+    }
+}
+
 
 
 Neopixels.configure({width:13, height:13, stripType:'grb'});
 
-var app = new App();
+var app = new ASequenceTestpp();
 app.run();
 
