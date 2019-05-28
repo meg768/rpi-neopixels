@@ -29,15 +29,16 @@ class SequenceTest {
 
 
     run() {
+        var self = this;
         setInterval(() => {
-            var x = this.offset % this.pixels.width;
-            var y = this.offset / this.pixels.width;
-    console.log('Loop', this.offset, x, y);
-            this.pixels.clear();
-            this.pixels.setPixelRGB(x, y, 255, 255, 255);
-            this.pixels.render();
+            var x = self.offset % self.pixels.width;
+            var y = self.offset / self.pixels.width;
+            console.log('Loop', self.offset, x, y);
+            self.pixels.clear();
+            self.pixels.setPixelRGB(x, y, 255, 255, 255);
+            self.pixels.render();
     
-            this.offset = (this.offset + 1) % (this.width * this.height);
+            self.offset = (self.offset + 1) % (self.width * self.height);
     
         }, 100);
 
