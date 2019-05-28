@@ -47,6 +47,6 @@ class SequenceTest {
 
 Neopixels.configure({width:13, height:13, stripType:'grb'});
 
-var app = new ASequenceTestpp();
+var app = new SequenceTest();
 app.run();
 
