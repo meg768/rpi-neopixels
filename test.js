@@ -27,19 +27,19 @@ class SequenceTest {
         console.log('Pixels', this.pixels.width, this.pixels.height);
     }
 
-    loop() {
-        var x = this.offset % this.pixels.width;
-        var y = this.offset / this.pixels.width;
-console.log('Loop', this.offset, x, y);
-        this.pixels.clear();
-        this.pixels.setPixelRGB(x, y, 255, 255, 255);
-        this.pixels.render();
-
-        this.offset = (this.offset + 1) % (this.width * this.height);
-    }
 
     run() {
-        setInterval(this.loop.bind(this), 100);
+        setInterval(() => {
+            var x = this.offset % this.pixels.width;
+            var y = this.offset / this.pixels.width;
+    console.log('Loop', this.offset, x, y);
+            this.pixels.clear();
+            this.pixels.setPixelRGB(x, y, 255, 255, 255);
+            this.pixels.render();
+    
+            this.offset = (this.offset + 1) % (this.width * this.height);
+    
+        }), 100);
 
 
     }
