@@ -8,7 +8,7 @@ function configure() {
     var height    = 13;
     var map       = 'alternating-matrix';
 
-    Neopixels.configure({map:map, width:width, height:height, stripType:stripType});
+    Neopixels.configure({debug:true, map:map, width:width, height:height, stripType:stripType});
 
 }
 
@@ -59,7 +59,7 @@ class FadeTest {
 
     constructor() {
 
-        this.pixels = new Neopixels.Pixels({debug:true});
+        this.pixels = new Neopixels.Pixels();
         this.offset = 0;
 
     }
