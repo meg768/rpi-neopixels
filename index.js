@@ -3,6 +3,8 @@ var Pixels = require('rpi-pixels');
 var sprintf = require('yow/sprintf');
 
 function debug() {
+    console.log.apply(this, arguments);
+
 }
 
 
