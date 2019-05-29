@@ -4,9 +4,11 @@ function installCleanup() {
 
 	function cleanup() {
         var pixels = new Neopixels.Pixels();
-        pixels.clear();
+
+        pixels.fill('red');
         pixels.render();
-		process.exit();
+        
+        process.exit();
 	}
 
 	process.on('SIGUSR1', cleanup);
@@ -21,7 +23,7 @@ class App {
     constructor() {
 
         installCleanup();
-        
+
         this.pixels = new Neopixels.Pixels();
         this.offset = 0;
 
