@@ -6,16 +6,10 @@ function debug() {
 }
 
 
-/*
-module.exports.Strip = require('./src/strip.js');
-module.exports.Matrix = require('./src/matrix.js');
-module.exports.Animation = require('./src/animation.js');
-module.exports.AnimationQueue = require('./src/animation-queue.js');
-*/
 
 var config = {};
 
-
+/*
 function installCleanup() {
 
 	function cleanup() {
@@ -29,6 +23,8 @@ function installCleanup() {
 	process.on('SIGTERM', cleanup);
 
 }
+*/
+
 
 module.exports.configure = function(options) {
 
@@ -123,4 +119,3 @@ module.exports.Pixels = class extends Pixels {
 
 }
 
-installCleanup();
