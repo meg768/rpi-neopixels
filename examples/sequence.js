@@ -5,8 +5,6 @@ class App {
 
     constructor() {
 
-        installCleanup();
-
         this.pixels = new Neopixels.Pixels();
         this.offset = 0;
 
