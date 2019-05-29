@@ -1,9 +1,27 @@
 var Neopixels = require('./neopixels.js');
 
+function installCleanup() {
+
+	function cleanup() {
+        var pixels = new Neopixels.Pixels();
+        pixels.clear();
+        pixels.render();
+		process.exit();
+	}
+
+	process.on('SIGUSR1', cleanup);
+	process.on('SIGUSR2', cleanup);
+	process.on('SIGINT',  cleanup);
+	process.on('SIGTERM', cleanup);
+
+}
+
 class App {
 
     constructor() {
 
+        installCleanup();
+        
         this.pixels = new Neopixels.Pixels();
         this.offset = 0;
 
