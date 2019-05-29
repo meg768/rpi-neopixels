@@ -86,6 +86,8 @@ module.exports.Pixels = class extends Pixels {
 
 		var tmp = this.tmp;
 
+        debug('Rendering...');
+
 		if (options && options.transition == 'fade') {
 
 			var duration = options.duration != undefined ? options.duration : 100;

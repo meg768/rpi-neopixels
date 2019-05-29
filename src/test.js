@@ -69,6 +69,7 @@ class FadeTest {
         //this.pixels.fill('red');
         //this.pixels.render();
 
+        this.pixels.fill('red');
         this.pixels.render({transition:'fade', duration:500});
         this.pixels.fill('green');
         this.pixels.render({transition:'fade', duration:500});
