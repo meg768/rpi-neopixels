@@ -8,7 +8,7 @@ function configure() {
     var height    = 13;
     var map       = 'alternating-matrix';
 
-    Neopixels.configure({debug:true, map:map, width:width, height:height, stripType:stripType});
+    Neopixels.configure({debug:false, map:map, width:width, height:height, stripType:stripType});
 
 }
 
