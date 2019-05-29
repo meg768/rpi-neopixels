@@ -145,13 +145,10 @@ module.exports.Pixels = class extends Pixels {
 		this.content.set(this.pixels);
 
 		// Display the current buffer
-		ws281x.render(this.content);
+		ws281x.render(this.pixels);
 
 	}
 
-    render() {
-        ws281x.render(this.pixels);
-    }
 
 }
 
