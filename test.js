@@ -49,6 +49,7 @@ function configure() {
     var width     = 13;
     var height    = 13;
     var map       = 'alternating-matrix';
+    /*
     var map       = new Uint16Array(width * height);
 
     for (var i = 0; i < map.length; i++) {
@@ -61,7 +62,7 @@ function configure() {
             map[i] = (row+1) * width - (col+1);
         }
     }
-
+*/
     Neopixels.configure({map:map, width:width, height:height, stripType:stripType});
 
 }
