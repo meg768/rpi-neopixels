@@ -32,41 +32,18 @@ function installCleanup() {
 
 module.exports.configure = function(options) {
 
-    var {map, width, height, ...other} = options;
-
+    var {width, height} = options;
 
     if (options.debug) {
         debug = function() {
             console.log.apply(this, arguments);
         }
-    }
-    if (typeof map == 'string') {
-        if (map == 'matrix') {
-            map = new Uint32Array(width * height);
+	}
+	
+	if (width == undefined || height == undefined)
+		throw new Error('Both width and height must be specified.');
 
-            for (var i = 0; i < map.length; i++) 
-                map[i] = i;
-
-        }
-        else if (map == 'alternating-matrix') {
-            map = new Uint32Array(width * height);
-
-            for (var i = 0; i < map.length; i++) {
-                var row = Math.floor(i / width), col = i % width;
-        
-                if ((row % 2) === 0) {
-                    map[i] = i;
-                }
-                else {
-                    map[i] = (row+1) * width - (col+1);
-                }
-            }        
-        }
-    }
-
-    config = {map:map, width:width, height:height};
-
-    ws281x.configure({map:map, leds: width * height, ...other});
+	ws281x.configure(config = options);
 }
 
 module.exports.Pixels = class extends Pixels {
