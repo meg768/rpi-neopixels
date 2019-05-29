@@ -67,6 +67,8 @@ class FadeTest {
 
     run() {
         this.pixels.fill('red');
+        this.pixels.render();
+        /*
         this.pixels.render({transition:'fade', duration:500});
         this.pixels.fill('green');
         this.pixels.render({transition:'fade', duration:500});
@@ -74,6 +76,8 @@ class FadeTest {
         this.pixels.render({transition:'fade', duration:500});
         this.pixels.fill('black');
         this.pixels.render({transition:'fade', duration:500});
+
+        */
     }
 }
 
