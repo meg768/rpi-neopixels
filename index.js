@@ -2,6 +2,9 @@ var ws281x = require('rpi-ws281x');
 var Pixels = require('rpi-pixels');
 var sprintf = require('yow/sprintf');
 
+function debug() {
+}
+
 
 /*
 module.exports.Strip = require('./src/strip.js');
@@ -31,6 +34,12 @@ module.exports.configure = function(options) {
 
     var {map, width, height, ...other} = options;
 
+
+    if (options.debug) {
+        debug = function() {
+            console.log.apply(this, arguments);
+        }
+    }
     if (typeof map == 'string') {
         if (map == 'matrix') {
             map = new Uint32Array(width * height);
@@ -78,7 +87,10 @@ module.exports.Pixels = class extends Pixels {
 		var tmp = this.tmp;
 
 		if (options && options.transition == 'fade') {
+
 			var duration = options.duration != undefined ? options.duration : 100;
+
+            debug('Fading...', duration);
 
 			if (duration > 0) {
 

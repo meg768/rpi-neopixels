@@ -59,7 +59,7 @@ class FadeTest {
 
     constructor() {
 
-        this.pixels = new Neopixels.Pixels();
+        this.pixels = new Neopixels.Pixels({debug:true});
         this.offset = 0;
 
     }
