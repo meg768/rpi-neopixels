@@ -48,6 +48,7 @@ function configure() {
     var stripType = 'grb';
     var width     = 13;
     var height    = 13;
+    var map       = 'alternating-matrix';
     var map       = new Uint16Array(width * height);
 
     for (var i = 0; i < map.length; i++) {

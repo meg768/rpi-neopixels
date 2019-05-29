@@ -14,7 +14,7 @@ module.exports.configure = function(options) {
     var {map, width, height, ...other} = options;
 
     if (typeof map == 'string') {
-        if (map == 'alternating') {
+        if (map == 'alternating-matrix') {
             map = new Uint16Array(width * height);
 
             for (var i = 0; i < map.length; i++) {
