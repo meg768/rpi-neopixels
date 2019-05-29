@@ -5,26 +5,7 @@ var sprintf = require('yow/sprintf');
 function debug() {
 }
 
-
-
 var config = {};
-
-/*
-function installCleanup() {
-
-	function cleanup() {
-		ws281x.reset();
-		process.exit();
-	}
-
-	process.on('SIGUSR1', cleanup);
-	process.on('SIGUSR2', cleanup);
-	process.on('SIGINT',  cleanup);
-	process.on('SIGTERM', cleanup);
-
-}
-*/
-
 
 module.exports.configure = function(options) {
 
