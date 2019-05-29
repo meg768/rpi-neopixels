@@ -2,24 +2,15 @@ var Neopixels = require('../index.js');
 
 function configure() {
 
-    function installCleanup() {
+    function cleanup() {
+        var pixels = new Neopixels.Pixels();
 
-        function cleanup() {
-            var pixels = new Neopixels.Pixels();
-    
-            pixels.fill('black');
-            pixels.render();
-            
-            process.exit();
-        }
-    
-        process.on('SIGUSR1', cleanup);
-        process.on('SIGUSR2', cleanup);
-        process.on('SIGINT',  cleanup);
-        process.on('SIGTERM', cleanup);
-    
+        pixels.fill('black');
+        pixels.render();
+        
+        process.exit();
     }
-    
+
     var stripType = 'grb';
     var width     = 13;
     var height    = 13;
@@ -27,8 +18,10 @@ function configure() {
 
     Neopixels.configure({debug:false, map:map, width:width, height:height, stripType:stripType});
 
-    installCleanup();
-
+    process.on('SIGUSR1', cleanup);
+    process.on('SIGUSR2', cleanup);
+    process.on('SIGINT',  cleanup);
+    process.on('SIGTERM', cleanup);
 }
 
 
