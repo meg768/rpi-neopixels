@@ -13,6 +13,23 @@ module.exports.configure = function(options) {
 
     var {map, width, height, ...other} = options;
 
+    if (typeof map == 'string') {
+        if (map == 'alternating') {
+            map = new Uint16Array(width * height);
+
+            for (var i = 0; i < map.length; i++) {
+                var row = Math.floor(i / width), col = i % width;
+        
+                if ((row % 2) === 0) {
+                    map[i] = i;
+                }
+                else {
+                    map[i] = (row+1) * width - (col+1);
+                }
+            }        
+        }
+    }
+
     config = {map:map, width:width, height:height};
 
     ws281x.configure({leds: width * height, ...other});
