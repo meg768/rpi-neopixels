@@ -9,6 +9,12 @@ module.exports.AnimationQueue = require('./src/animation-queue.js');
 
 var config = {};
 
+// Trap the SIGINT and reset before exit
+process.on('SIGINT', () => {
+    ws281x.reset();
+    process.exit(0);
+});
+
 module.exports.configure = function(options) {
 
     var {map, width, height, ...other} = options;
