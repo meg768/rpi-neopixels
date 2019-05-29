@@ -3,8 +3,6 @@ var Pixels = require('rpi-pixels');
 var sprintf = require('yow/sprintf');
 
 function debug() {
-    console.log.apply(this, arguments);
-
 }
 
 
@@ -88,13 +86,9 @@ module.exports.Pixels = class extends Pixels {
 
 		var tmp = this.tmp;
 
-        debug('Rendering...');
-
 		if (options && options.transition == 'fade') {
 
 			var duration = options.duration != undefined ? options.duration : 100;
-
-            debug('Fading...', duration);
 
 			if (duration > 0) {
 
