@@ -1,4 +1,4 @@
-var Neopixels = require('../neopixels.js');
+var Neopixels = require('./neopixels.js');
 
 class App {
 
