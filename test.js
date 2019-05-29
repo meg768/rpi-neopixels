@@ -1,6 +1,17 @@
 var Neopixels = require('./index.js');
 
 
+function configure() {
+
+    var stripType = 'grb';
+    var width     = 13;
+    var height    = 13;
+    var map       = 'alternating-matrix';
+
+    Neopixels.configure({map:map, width:width, height:height, stripType:stripType});
+
+}
+
 class FillTest {
 
     constructor() {
@@ -43,29 +54,6 @@ class SequenceTest {
     }
 }
 
-function configure() {
-
-    var stripType = 'grb';
-    var width     = 13;
-    var height    = 13;
-    var map       = 'alternating-matrix';
-    /*
-    var map       = new Uint16Array(width * height);
-
-    for (var i = 0; i < map.length; i++) {
-        var row = Math.floor(i / width), col = i % width;
-
-        if ((row % 2) === 0) {
-            map[i] = i;
-        }
-        else {
-            map[i] = (row+1) * width - (col+1);
-        }
-    }
-*/
-    Neopixels.configure({map:map, width:width, height:height, stripType:stripType});
-
-}
 
 
 configure();
