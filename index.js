@@ -15,7 +15,7 @@ module.exports.configure = function(options) {
 
     if (typeof map == 'string') {
         if (map == 'alternating-matrix') {
-            map = new Uint16Array(width * height);
+            map = new Uint32Array(width * height);
 
             for (var i = 0; i < map.length; i++) {
                 var row = Math.floor(i / width), col = i % width;
@@ -41,25 +41,8 @@ module.exports.Pixels = class extends Pixels {
         super({...options, width:config.width, height:config.height});
     }
 
-    map() {
-        if (config.map) {
-            var map = config.map;
-            var length = this.width * this.height;
-            var tmp = new Uint32Array(length);
-            var pixels = this.pixels;
-            
-            for (var i = 0; i < length; i++) {
-                tmp[i] = pixels[map[i]];
-            }
-    
-            return tmp;
-        }
-        else
-            return this.pixels;
-    }
-
-    render(options) {
-        ws281x.render(this.map());
+    render() {
+        ws281x.render(this.pixels);
     }
 
 }
