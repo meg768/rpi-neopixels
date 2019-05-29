@@ -25,6 +25,6 @@ class App {
 }
 
 
-var app = new FadeTest();
+var app = new App();
 app.run();
 
