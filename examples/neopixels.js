@@ -1,6 +1,5 @@
 var Neopixels = require('../index.js');
 
-
 function configure() {
 
     var stripType = 'grb';
