@@ -79,7 +79,7 @@ module.exports.Pixels = class extends Pixels {
 		this.length  = this.width * this.height;
 		this.content = new Uint32Array(this.length);
 		this.tmp     = new Uint32Array(this.length);
-		this.speed   = options.speed ? options.speed : 1.0;
+		this.speed   = options.speed ? options.speed : 0.5;
 
     }
 
