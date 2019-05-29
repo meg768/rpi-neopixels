@@ -1,7 +1,4 @@
-require('./configure.js');
-
-var Neopixels = require('../index.js');
-
+var Neopixels = require('./neopixels.js');
 
 
 class App {
@@ -26,7 +23,6 @@ class App {
 
     }
 }
-
 
 
 var app = new FadeTest();

@@ -13,3 +13,5 @@ function configure() {
 }
 
 configure();
+
+module.exports = Neopixels;
