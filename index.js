@@ -38,7 +38,7 @@ module.exports.configure = function(options) {
 
     config = {map:map, width:width, height:height};
 
-    ws281x.configure({leds: width * height, ...other});
+    ws281x.configure({map:map, leds: width * height, ...other});
 }
 
 module.exports.Pixels = class extends Pixels {
