@@ -1,10 +1,9 @@
 var ws281x = require('rpi-ws281x');
 var Pixels = require('rpi-pixels');
 var sprintf = require('yow/sprintf');
+var isFunction = require('yow/is').isFunction;
 
-function debug() {
-}
-
+var debug = function() {};
 var config = {};
 
 
@@ -88,10 +87,18 @@ Neopixels.configure = function(options) {
 
     var {width, height} = options;
 
+	module.exports.isFunction = function(obj) {
+		return typeof obj === 'function';
+	};
+
     if (options.debug) {
-        debug = function() {
-            console.log.apply(this, arguments);
-        }
+		debug = function() {
+			console.log.apply(this, arguments);
+		}
+
+		if (isFunction(options.debug)) {
+			debug = options.debug;
+		}
 	}
 	
 	if (width == undefined || height == undefined)
