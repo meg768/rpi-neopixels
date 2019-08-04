@@ -87,10 +87,6 @@ Neopixels.configure = function(options) {
 
     var {width, height} = options;
 
-	module.exports.isFunction = function(obj) {
-		return typeof obj === 'function';
-	};
-
     if (options.debug) {
 		debug = function() {
 			console.log.apply(this, arguments);

@@ -4,10 +4,7 @@ var Neopixels = require('./neopixels.js');
 class App {
 
     constructor() {
-
         this.pixels = new Neopixels();
-        this.offset = 0;
-
     }
 
     run() {
