@@ -3,7 +3,7 @@ var Neopixels = require('../index.js');
 function configure() {
 
     function cleanup() {
-        var pixels = new Neopixels.Pixels();
+        var pixels = new Neopixels();
 
         pixels.fill('black');
         pixels.render();

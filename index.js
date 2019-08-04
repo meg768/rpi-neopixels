@@ -7,23 +7,8 @@ function debug() {
 
 var config = {};
 
-module.exports.configure = function(options) {
 
-    var {width, height} = options;
-
-    if (options.debug) {
-        debug = function() {
-            console.log.apply(this, arguments);
-        }
-	}
-	
-	if (width == undefined || height == undefined)
-		throw new Error('Both width and height must be specified.');
-
-	ws281x.configure(config = options);
-}
-
-module.exports.Pixels = class extends Pixels {
+class Neopixels extends Pixels {
 
     constructor(options = {}) {
         super({...options, width:config.width, height:config.height});
@@ -34,7 +19,6 @@ module.exports.Pixels = class extends Pixels {
 		this.speed   = options.speed ? options.speed : 0.5;
 
     }
-
 
 	render(options) {
 
@@ -100,3 +84,21 @@ module.exports.Pixels = class extends Pixels {
 
 }
 
+Neopixels.configure = function(options) {
+
+    var {width, height} = options;
+
+    if (options.debug) {
+        debug = function() {
+            console.log.apply(this, arguments);
+        }
+	}
+	
+	if (width == undefined || height == undefined)
+		throw new Error('Both width and height must be specified.');
+
+	ws281x.configure(config = options);
+}
+
+
+module.exports = Neopixels;
