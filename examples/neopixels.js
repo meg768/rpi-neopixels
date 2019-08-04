@@ -1,30 +1,25 @@
 var Neopixels = require('../index.js');
 
-function configure() {
+function cleanup() {
+    console.log('Cleaning up...');
+    var pixels = new Neopixels();
 
-    function cleanup() {
-        var pixels = new Neopixels();
-
-        pixels.fill('black');
-        pixels.render();
-        
-        process.exit();
-    }
-
-    var stripType = 'grb';
-    var width     = 13;
-    var height    = 13;
-    var map       = 'alternating-matrix';
-
-    Neopixels.configure({debug:false, map:map, width:width, height:height, stripType:stripType});
-
-    process.on('SIGUSR1', cleanup);
-    process.on('SIGUSR2', cleanup);
-    process.on('SIGINT',  cleanup);
-    process.on('SIGTERM', cleanup);
+    pixels.fill('black');
+    pixels.render();
+    
+    process.exit();
 }
 
+var stripType = 'grb';
+var width     = 13;
+var height    = 13;
+var map       = 'alternating-matrix';
 
-configure();
+Neopixels.configure({debug:false, map:map, width:width, height:height, stripType:stripType});
+
+process.on('SIGUSR1', cleanup);
+process.on('SIGUSR2', cleanup);
+process.on('SIGINT',  cleanup);
+process.on('SIGTERM', cleanup);
 
 module.exports = Neopixels;
