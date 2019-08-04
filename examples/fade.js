@@ -23,7 +23,6 @@ class App {
     }
 }
 
-
 var app = new App();
 app.run();
 
