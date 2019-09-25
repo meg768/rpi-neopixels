@@ -23,8 +23,8 @@ function cleanup() {
 }
 
 var stripType = 'grb';
-var width     = 13;
-var height    = 13;
+var width     = 24;
+var height    = 1;
 var map       = 'alternating-matrix';
 
 Neopixels.configure({debug:debug, map:map, width:width, height:height, stripType:stripType});

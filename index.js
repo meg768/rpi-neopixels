@@ -6,7 +6,7 @@ var isFunction = require('yow/is').isFunction;
 var debug = function() {};
 var config = {};
 
-
+	
 class Neopixels extends Pixels {
 
     constructor(options = {}) {
