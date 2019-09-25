@@ -25,9 +25,10 @@ function cleanup() {
 var stripType = 'grb';
 var width     = 24;
 var height    = 1;
+var leds      = 24;
 var map       = 'alternating-matrix';
 
-Neopixels.configure({debug:debug, map:map, width:width, height:height, stripType:stripType});
+Neopixels.configure({leds:leds, debug:debug, map:map, width:width, height:height, stripType:stripType});
 
 process.on('SIGUSR1', cleanup);
 process.on('SIGUSR2', cleanup);
