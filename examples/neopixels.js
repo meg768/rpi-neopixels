@@ -23,9 +23,10 @@ function cleanup() {
 }
 
 var stripType = 'grb';
-var leds      = 24;
+var width     = 24;
+var height    = 1;
 
-Neopixels.configure({leds:leds, debug:debug, stripType:stripType});
+Neopixels.configure({width:width, height:height, debug:debug, stripType:stripType});
 
 process.on('SIGUSR1', cleanup);
 process.on('SIGUSR2', cleanup);
