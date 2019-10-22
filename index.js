@@ -1,7 +1,7 @@
 var ws281x = require('rpi-ws281x');
 var Pixels = require('rpi-pixels');
 var sprintf = require('yow/sprintf');
-var isFunction = require('yow/is').isFunction;
+var isFunction = require('yow/isFunction');
 
 var debug = function() {};
 var config = {};
