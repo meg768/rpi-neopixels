@@ -1,27 +1,12 @@
 {
-    // See https://go.microsoft.com/fwlink/?LinkId=733558 
-    // for the documentation about the tasks.json format
-    "version": "2.0.0",
-    "tasks": [
-        {
-            "type": "npm",
-            "script": "git-commit",
-            "problemMatcher": []
-        },
-        {
-            "type": "npm",
-            "script": "npm-publish",
-            "problemMatcher": []
-        },
-        {
-            "type": "npm",
-            "script": "goto-github",
-            "problemMatcher": []
-        },
-        {
-            "type": "npm",
-            "script": "goto-npm",
-            "problemMatcher": []
-        }
-    ]
+	"version": "2.0.0",
+	"tasks": [
+		{
+			"type": "npm",
+			"script": "git-commit",
+			"problemMatcher": [],
+			"label": "npm: git-commit",
+			"detail": "make git-commit"
+		}
+	]
 }
