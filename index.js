@@ -17,11 +17,17 @@ class Neopixels extends Pixels {
 		this.tmp = new Uint32Array(this.width * this.height);
 		this.speed = 0.5;
 		this.debug = typeof options.debug == 'function' ? options.debug : options.debug ? console.log : function () {};
+		this.gamma = options.gamma != undefined ? options.gamma : 2.2;
 
 		process.on('SIGUSR1', cleanup);
 		process.on('SIGUSR2', cleanup);
 		process.on('SIGINT', cleanup);
 		process.on('SIGTERM', cleanup);
+	}
+
+	renderRaw(pixels) {
+		this.channel.array.set(Neopixels.gammaCorrect(pixels, this.gamma));
+		ws281x.render();
 	}
 
 	render(options) {
@@ -56,8 +62,7 @@ class Neopixels extends Pixels {
 						tmp[i] = (red << 16) | (green << 8) | blue;
 					}
 
-					this.channel.array.set(Neopixels.gammaCorrect(tmp));
-					ws281x.render();
+					this.renderRaw(tmp);
 				}
 
 				var now = new Date();
@@ -78,10 +83,8 @@ class Neopixels extends Pixels {
 		this.content.set(this.pixels);
 
 		// Display the current buffer
-		this.channel.array.set(Neopixels.gammaCorrect(this.pixels));
-		ws281x.render();
+		this.renderRaw(this.pixels);
 	}
 }
 
 module.exports = Neopixels;
-
