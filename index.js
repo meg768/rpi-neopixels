@@ -16,6 +16,7 @@ class Neopixels extends Pixels {
 		this.content = new Uint32Array(this.length);
 		this.tmp     = new Uint32Array(this.length);
 		this.speed   = options.speed ? options.speed : 0.5;
+		this.gamma   = options.gamma ? options.gamma : 0;
 
     }
 
@@ -54,7 +55,7 @@ class Neopixels extends Pixels {
 						tmp[i] = (red << 16) | (green << 8) | blue;
 					}
 
-					ws281x.render(tmp);
+					ws281x.render(Pixels.gammaCorrect(tmp, this.gamma));
 				}
 
 				var now  = new Date();
@@ -76,7 +77,7 @@ class Neopixels extends Pixels {
 		this.content.set(this.pixels);
 
 		// Display the current buffer
-		ws281x.render(this.pixels);
+		ws281x.render(Pixels.gammaCorrect(this.pixels, this.gamma));
 
 	}
 
