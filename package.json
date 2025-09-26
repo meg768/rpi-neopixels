@@ -1,6 +1,6 @@
 {
   "name": "rpi-neopixels",
-  "version": "1.1.8",
+  "version": "1.1.10",
   "description": "Neopixels for Raspberry Pi",
   "main": "index.js",
   "scripts": {
@@ -23,8 +23,8 @@
   "dependencies": {
       "color": "^2.0.1",
       "yow": "^1.0.107",
-      "rpi-pixels": "^1.1.8",
-      "rpi-ws281x": "^1.1.8"
+      "rpi-pixels": "^1.1.10",
+      "rpi-ws281x": "^1.1.10"
 },
   "homepage": "https://github.com/meg768/rpi-neopixels#readme"
 }
