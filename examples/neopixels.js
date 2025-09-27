@@ -23,8 +23,8 @@ function cleanup() {
 }
 
 var stripType = 'grb';
-var width     = 24;
-var height    = 1;
+var width     = 13;
+var height    = 13;
 
 Neopixels.configure({width:width, height:height, debug:debug, stripType:stripType});
 
