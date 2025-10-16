@@ -63,36 +63,64 @@ Common options:
 
 ---
 
-### `render(pixels, options = {})`
+### `render(options)`
 
-Renders a new frame to the LEDs.  
-If fade options are supplied, the function **blends from the previous frame to the new one** internally, blocking until the fade is complete.
+Renders the current pixel buffer to the LED strip or matrix, with optional **blocking fade transitions** handled entirely inside the function.
 
-**Parameters**
-- `pixels` (`Uint32Array`): Packed colors as `0xWWRRGGBB` (RGBW) or `0x00RRGGBB` (RGB).
-- `options` (object, optional):
-  - `fade` (`boolean | number`) – enable fade; if a number, interpreted as `durationMs`.
-  - `durationMs` (`number`) – fade duration in milliseconds (default: 0 = instant).
-  - `steps` (`number`) – number of intermediate frames (default derived from duration).
-  - `easing` (`string`) – easing curve name such as `"linear"` or `"easeInOutQuad"`.
-  - `gamma` (`number`) – optional gamma correction applied during fade.
-  - `blendMode` (`string`) – `'lerp'`, `'add'`, or `'max'` (default `'lerp'`).
+This function is **synchronous** — it does *not* use promises or async/await —  and will block the Node.js event loop while the fade is in progress.
 
-**Behavior**
-1. Uses the cached previous frame (`prev`) as a starting point.
-2. Interpolates channel values in multiple steps according to the easing curve.
-3. Applies optional gamma correction during blending.
-4. Writes each intermediate frame directly to the LEDs.
-5. Blocks until the fade is complete.
+#### Parameters
 
-**Notes**
-- The function is **synchronous and blocking**.
-- Fades occur entirely within `render()`; no asynchronous logic is used.
-- Provide a fresh `Uint32Array` each call; internal state is updated per frame.
+| Name                 | Type     | Default             | Description                                                  |
+| -------------------- | -------- | ------------------- | ------------------------------------------------------------ |
+| `options`            | `object` | `{}`                | Optional configuration object                                |
+| `options.transition` | `'fade'` | –                   | When set to `'fade'`, performs a synchronous cross-fade between frames. |
+| `options.duration`   | `number` | `100`               | Fade duration in milliseconds. Values ≤ 0 disable the fade (instant draw). |
+| `options.speed`      | `number` | *(auto-calibrated)* | Optional override for step speed. If omitted, the method measures its own runtime and updates `this.speed` adaptively. |
 
----
+#### Behavior
 
-### `reset()`
+1. Uses the previously rendered frame (`this.content`) as the start frame  
+   and the current frame (`this.pixels`) as the target.
+2. Calculates `numSteps = duration * this.speed`.  
+   This determines how many intermediate frames will be rendered.
+3. For each step:
+   - Unpacks RGB channels from both frames (`0xRRGGBB`).
+   - Linearly interpolates each color component:  
+     `red = r1 + (step * (r2 - r1)) / numSteps` (same for green and blue).
+   - Packs the interpolated color into `this.tmp[i] = (red << 16) | (green << 8) | blue`.
+   - Calls `ws281x.render(this.tmp)` to display the intermediate frame.
+4. After the fade completes:
+   - Updates `this.speed` if `options.speed` was not specified  
+     (simple moving average based on measured duration).
+   - Copies `this.pixels` into `this.content` (new “previous” frame).
+   - Performs a final `ws281x.render(this.pixels)` to show the exact target frame.
+
+#### Notes
+
+- Color values are truncated to integers through bitwise operations.  
+  No rounding or clamping is applied.
+- Operates on **RGB only** (`0xRRGGBB`); white channel is ignored.
+- Fades are **blocking** — while in progress, no other JavaScript executes.
+- `speed` auto-adjustment provides smoother fades over time  
+  without manual calibration.
+- After each fade, the exact target frame is re-rendered once for consistency.
+
+#### Example
+
+```js
+// Instant draw (no fade)
+pixels.fill(0xFF0000); // red
+renderer.pixels = pixels;
+renderer.render();
+
+// 300 ms blocking fade to blue
+pixels.fill(0x0000FF);
+renderer.pixels = pixels;
+renderer.render({ transition: 'fade', duration: 300 });
+```
+
+### reset()
 
 Turns off the LEDs and releases driver resources.
 
